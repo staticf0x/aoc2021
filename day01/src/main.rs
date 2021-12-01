@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
+use std::vec;
 
 fn get_increases(numbers: &Vec<u32>) -> u32 {
     let mut prev_depth = 0;
@@ -33,4 +34,17 @@ fn main() {
 
     println!("{}", get_increases(&numbers));
     assert_eq!(get_increases(&numbers), 1665);
+
+    let mut tri_sums: Vec<u32> = vec![];
+
+    for i in 0..numbers.len() {
+        if i > numbers.len() - 3 {
+            break;
+        }
+
+        tri_sums.push(numbers[i] + numbers[i + 1] + numbers[i + 2]);
+    }
+
+    println!("{}", get_increases(&tri_sums));
+    assert_eq!(get_increases(&tri_sums), 1702);
 }
