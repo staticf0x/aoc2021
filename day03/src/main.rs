@@ -2,16 +2,7 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 
 fn parse_bin(s: &str) -> u32 {
-    let mut n: u32 = 0;
-
-    for c in 0..s.len() {
-        let pos = s.len() - c - 1;
-        let bit: u32 = (&s[c..c + 1]).parse().unwrap();
-
-        n += bit << pos;
-    }
-
-    n
+    u32::from_str_radix(s, 2).unwrap()
 }
 
 fn get_bit(n: u32, pos: usize) -> u8 {
@@ -88,6 +79,7 @@ fn main() {
     let epsilon = get_epsilon(&numbers, 12);
 
     println!("{}", gamma * epsilon);
+    assert_eq!(gamma * epsilon, 4138664);
 }
 
 #[test]
